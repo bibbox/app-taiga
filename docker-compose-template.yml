@@ -100,7 +100,7 @@ services:
           - RABBIT_VHOST=taiga 
 
   §§INSTANCE-taiga-proxy:          
-        image: dockertaiga/proxy
+        image: bibbox/taiga-proxy
         container_name: §§INSTANCE-taiga-proxy
         restart: unless-stopped
         ports:

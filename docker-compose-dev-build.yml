@@ -1,0 +1,131 @@
+version: '2'
+
+services:
+
+  dev-taiga-back:
+    build:
+      context: ./images/taiga-back     
+    image: taiga-back
+    container_name: dev-taiga-back
+    restart: unless-stopped
+    depends_on:
+        - dev-taiga-db
+        - dev-taiga-events
+    links:
+        - dev-taiga-db:db
+    restart: unless-stopped
+    volumes:
+          - ./data/conf/back:/taiga-conf
+          - ./data/media:/taiga-media
+    environment:
+            - TAIGA_HOST=localhost:8010
+            - TAIGA_FRONT_HOST=dev-taiga-front
+            - EVENTS_HOST=dev-taiga-events
+            - TAIGA_SECRET=secret
+            - POSTGRES_HOST=dev-taiga-db
+            - POSTGRES_DB=taiga
+            - POSTGRES_USER=postgres
+            - POSTGRES_PASSWORD=changeforproduction
+            - RABBIT_HOST=dev-taiga-rabbit
+            - RABBIT_USER=taiga
+            - RABBIT_PASSWORD=changeforproduction
+            - RABBIT_VHOST=taiga 
+            - REDIS_HOST=dev-taiga-redis
+            - REDIS_DB=0
+            - REDIS_PASSWORD=changeforproduction      
+ 
+  dev-taiga-front:
+      build:
+        context: ./images/taiga-front     
+      image: taiga-back
+      container_name: dev-taiga-front
+      restart: unless-stopped
+      volumes:
+           - ./data/conf/front:/taiga-conf
+      environment:
+            - TAIGA_HOST=localhost:8010
+            - TAIGA_SCHEME=http
+            - TAIGA_BACK_HOST=dev-taiga-back
+            - TAIGA_FRONT_HOST=dev-taiga-front
+            - EVENTS_HOST=dev-taiga-events
+            - TAIGA_SECRET=secret
+            - ENABLE_SSL=no
+  
+  dev-taiga-db:
+      image: postgres:11-alpine
+      container_name: dev-taiga-db
+      restart: unless-stopped
+      volumes:
+        - ./data/db:/var/lib/postgresql/data
+      environment:
+          - POSTGRES_HOST=dev-taiga-db
+          - POSTGRES_DB=taiga
+          - POSTGRES_USER=postgres
+          - POSTGRES_PASSWORD=changeforproduction
+  
+  dev-taiga-adminer:
+      image: adminer
+      container_name: dev-taiga-adminer
+      restart: unless-stopped
+      ports:
+          - 8381:8080
+
+  dev-taiga-rabbit:
+      build:
+        context: ./images/taiga-rabbit     
+      image: taiga-rabbit
+      restart: unless-stopped
+      environment:
+        - TAIGA_BACK_HOST=dev-taiga-back
+        - TAIGA_SECRET=secret
+        - RABBIT_HOST=dev-taiga-rabbit
+        - RABBIT_USER=taiga
+        - RABBIT_PASSWORD=changeforproduction
+        - RABBIT_VHOST=taiga 
+
+  dev-taiga-redis:  
+      image: bitnami/redis:5.0
+      container_name: dev-taiga-redis
+      restart: unless-stopped
+      environment:
+        - REDIS_HOST=dev-taiga-redis
+        - REDIS_DB=0
+        - REDIS_PASSWORD=changeforproduction
+
+  dev-taiga-events:    
+      build:
+        context:  ./images/taiga-events      
+      image: taiga-events
+      container_name: dev-taiga-events
+      restart: unless-stopped
+      depends_on:
+        - dev-taiga-rabbit  
+      environment:
+          - TAIGA_SECRET=secret
+          - RABBIT_HOST=dev-taiga-rabbit
+          - RABBIT_USER=taiga
+          - RABBIT_PASSWORD=changeforproduction
+          - RABBIT_VHOST=taiga 
+
+  dev-taiga-proxy:         
+        build:
+            context: ./images/taiga-proxy
+        image: taiga-proxy    
+        container_name: dev-taiga-proxy
+        restart: unless-stopped
+        ports:
+            - 8010:80
+        depends_on:
+          - dev-taiga-front
+          - dev-taiga-back
+          - dev-taiga-events
+        volumes:
+          - ./data/conf/proxy:/taiga-conf
+        environment:
+          - TAIGA_HOST=localhost:8010
+          - EVENTS_HOST=dev-taiga-events
+          - TAIGA_BACK_HOST=dev-taiga-back
+          - TAIGA_FRONT_HOST=dev-taiga
+
+
+

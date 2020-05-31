@@ -36,6 +36,9 @@ The BIBBOX framework can be installed
 
 for an alternatiev TAIGA docker and hints on more configuration varaibels  hav a look at [evinsolutions] repository (https://github.com/devinsolutions/docker-taiga) 
 
+* https://github.com/docker-taiga
+* https://github.com/devinsolutions/docker-taiga
+
 
 ## Install Environment Variables
 
