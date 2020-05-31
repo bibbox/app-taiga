@@ -25,11 +25,11 @@ The BIBBOX framework can be installed
 
 
 ## Docker Images Used
-* [dockertaiga/front](https://hub.docker.com/r/dockertaiga/front) 
-* [dockertaiga/back](https://hub.docker.com/r/dockertaiga/back) 
-* [dockertaiga/proxy](https://hub.docker.com/r/dockertaiga/proxy) 
-* [dockertaiga/rabbit](https://hub.docker.com/r/dockertaiga/rabbit) 
-* [dockertaiga/event](https://hub.docker.com/r/dockertaiga/event) 
+* [bibbox/taiga-front](https://hub.docker.com/r/bibbox/taiga-front) 
+* [bibbox/taiga-back](https://hub.docker.com/r/bibbox/taiga-back) 
+* [bibbox/taiga-proxy](https://hub.docker.com/r/bibbox/taiga-proxy) 
+* [bibbox/taiga-rabbit](https://hub.docker.com/r/bibbox/taiga-rabbit) 
+* [bibbox/taiga-event](https://hub.docker.com/r/bibbox/taiga-event) 
 * [bitnami/redis:5.0](https://hub.docker.com/r/bitnami/redis), offical container
 * [postgres:11-alpine](https://hub.docker.com/_/postgres), offical container
 * [adminer](https://hub.docker.com/_/adminer), offical container
@@ -38,6 +38,7 @@ for an alternatiev TAIGA docker and hints on more configuration varaibels  hav a
 
 * https://github.com/docker-taiga
 * https://github.com/devinsolutions/docker-taiga
+* http://taigaio.github.io/taiga-doc/dist/
 
 
 ## Install Environment Variables

@@ -37,7 +37,7 @@ services:
   dev-taiga-front:
       build:
         context: ./images/taiga-front     
-      image: taiga-back
+      image: taiga-front
       container_name: dev-taiga-front
       restart: unless-stopped
       volumes:
@@ -74,6 +74,7 @@ services:
       build:
         context: ./images/taiga-rabbit     
       image: taiga-rabbit
+      container_name: dev-taiga-rabbit
       restart: unless-stopped
       environment:
         - TAIGA_BACK_HOST=dev-taiga-back
