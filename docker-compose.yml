@@ -37,7 +37,7 @@ services:
     container_name: BIBBOX-taiga-front
     restart: unless-stopped
     volumes:
-           - ./data/conf/font:/taiga-conf
+           - ./data/conf/front:/taiga-conf
     environment:
             - TAIGA_HOST=localhost:8010
             - TAIGA_SCHEME=http
@@ -100,8 +100,8 @@ services:
           - RABBIT_PASSWORD=changeforproduction
           - RABBIT_VHOST=taiga 
 
-  BIBBOX-taiga-proxy:          
-        image: dockertaiga/proxy
+  BIBBOX-taiga-proxy:         
+        image: bibbox/taiga-proxy
         container_name: BIBBOX-taiga-proxy
         restart: unless-stopped
         ports:
