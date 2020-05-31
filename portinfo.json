@@ -7,7 +7,7 @@
       "proxy" : "PRIMARY"
     }, 
     {
-      "id": "§§PORT1S",
+      "id": "§§SSLPORT",
       "url": "§§INSTANCE",
       "protocol": "HTTPS",
       "proxy" : "PRIMARY"

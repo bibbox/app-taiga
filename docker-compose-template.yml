@@ -106,7 +106,7 @@ services:
         restart: unless-stopped
         ports:
             - §§PORT1:80
-            - §§PORT1S:443
+            - §§SSLPORT:443
         depends_on:
           - §§INSTANCE-taiga-front
           - §§INSTANCE-taiga-back

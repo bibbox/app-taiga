@@ -4,7 +4,7 @@
       "display_name":"Server FQDN",
       "type":"text",
       "default_value":"vendetta",
-      "description":"FQDN without the schema, e.g.  silicolab.bibbox.org, in most cases this es  the URL of the BIBOX server, execpt if you use a proxy to change the URL. ",
+      "description":"FQDN without the schema, e.g.  silicolab.bibbox.org, in most cases this is the URL of the BIBOX server, execpt if you use a proxy to change the URL. ",
       "min_length": "1",
       "max_length": "128"
    },   
