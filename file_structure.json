@@ -1,0 +1,10 @@
+{
+    "makefolders":[
+        "data/conf/back",
+        "data/conf/front",
+        "data/conf/proxy",
+        "data/db"      
+    ],
+    "copyfiles":[
+    ]
+}

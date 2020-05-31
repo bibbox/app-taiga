@@ -1,0 +1,10 @@
+{
+		"name": "Taiga project management application",
+		"short_name": "APP Taiga",
+		"version": "V.1.0",
+		"description": "Taiga project management application",
+        "short_description": "Taiga project management application",
+		"catalogue_url": "URL to biobankapps, if applicaple",
+		"application_url": "https://github.com/taigaio",
+		"tags": ["Project Management", "Tool"]
+}

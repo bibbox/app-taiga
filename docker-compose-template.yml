@@ -1,0 +1,122 @@
+version: '2'
+
+services:
+
+  §§INSTANCE-taiga-back:
+    image: dockertaiga/back
+    container_name: §§INSTANCE-taiga-back
+    restart: unless-stopped
+    depends_on:
+        - §§INSTANCE-taiga-db
+        - §§INSTANCE-taiga-events
+    links:
+        - §§INSTANCE-taiga-db:db
+    restart: unless-stopped
+    volumes:
+          - ./data/conf/back:/taiga-conf
+          - ./data/media:/taiga-media
+    environment:
+        - TAIGA_HOST="http://§§INSTANCE.§§DOMAIN"
+        - TAIGA_FRONT_HOST=§§INSTANCE-taiga-front
+        - EVENTS_HOST=§§INSTANCE-taiga-events
+        - TAIGA_SECRET=secret
+        - POSTGRES_HOST=§§INSTANCE-taiga-db
+        - POSTGRES_DB=taiga
+        - POSTGRES_USER=postgres
+        - POSTGRES_PASSWORD=§§DATABASE_PASSWORD
+        - RABBIT_HOST=§§INSTANCE-taiga-rabbit
+        - RABBIT_USER=taiga
+        - RABBIT_PASSWORD=password
+        - RABBIT_VHOST=taiga 
+        - REDIS_HOST=§§INSTANCE-taiga-redis
+        - REDIS_DB=0
+        - REDIS_PASSWORD=password      
+ 
+  §§INSTANCE-taiga-front:
+    image: dockertaiga/front
+    container_name: §§INSTANCE-taiga-front
+    restart: unless-stopped
+    volumes:
+           - ./data/conf/font:/taiga-conf
+    environment:
+          - TAIGA_HOST=http://§§INSTANCE.§§DOMAIN
+          - TAIGA_SCHEME=http
+          - TAIGA_BACK_HOST=§§INSTANCE-taiga-back
+          - TAIGA_FRONT_HOST=§§INSTANCE-taiga-front
+          - EVENTS_HOST=§§INSTANCE-taiga-events
+          - TAIGA_SECRET=§§SECRET_PHRASE
+          - ENABLE_SSL=no
+  
+  §§INSTANCE-taiga-db:
+      image: postgres:11-alpine
+      container_name: §§INSTANCE-taiga-db
+      restart: unless-stopped
+      volumes:
+        - ./data/db:/var/lib/postgresql/data
+      environment:
+          - POSTGRES_HOST=§§INSTANCE-taiga-db
+          - POSTGRES_DB=taiga
+          - POSTGRES_USER=postgres
+          - POSTGRES_PASSWORD=§§DATABASE_PASSWORD
+  
+  §§INSTANCE-taiga-adminer:
+            image: adminer
+            container_name: §§INSTANCE-taiga-adminer
+            restart: unless-stopped
+            ports:
+              - §§PORT2:8080
+
+  §§INSTANCE-taiga-rabbit:
+      image: dockertaiga/rabbit
+      container_name: §§INSTANCE-taiga-rabbit
+      restart: unless-stopped
+      environment:
+        - TAIGA_BACK_HOST=§§INSTANCE-taiga-back
+        - TAIGA_SECRET=secret
+        - RABBIT_HOST=§§INSTANCE-taiga-rabbit
+        - RABBIT_USER=taiga
+        - RABBIT_PASSWORD=§§RABBIT_PASSWORD
+        - RABBIT_VHOST=taiga 
+
+  §§INSTANCE-taiga-redis:  
+      image: bitnami/redis:5.0
+      container_name: §§INSTANCE-taiga-redis
+      restart: unless-stopped
+      environment:
+        - REDIS_HOST=§§INSTANCE-taiga-redis
+        - REDIS_DB=0
+        - REDIS_PASSWORD=§§REDIS_PASSWORD
+
+  §§INSTANCE-taiga-events:          
+      image: dockertaiga/events
+      container_name: §§INSTANCE-taiga-events
+      restart: unless-stopped
+      depends_on:
+        - §§INSTANCE-taiga-rabbit  
+      environment:
+          - TAIGA_SECRET=secret
+          - RABBIT_HOST=§§INSTANCE-taiga-rabbit
+          - RABBIT_USER=taiga
+          - RABBIT_PASSWORD=§§RABBIT_PASSWORD
+          - RABBIT_VHOST=taiga 
+
+  §§INSTANCE-taiga-proxy:          
+        image: dockertaiga/proxy
+        container_name: §§INSTANCE-taiga-proxy
+        restart: unless-stopped
+        ports:
+            - §§PORT1:80
+            - §§PORT1S:443
+        depends_on:
+          - §§INSTANCE-taiga-front
+          - §§INSTANCE-taiga-back
+          - §§INSTANCE-taiga-events
+        volumes:
+          - ./data/conf/proxy:/taiga-conf
+        environment:
+          - TAIGA_HOST=http://§§INSTANCE.§§DOMAIN
+          - EVENTS_HOST=§§INSTANCE-taiga-events
+          - TAIGA_BACK_HOST=§§INSTANCE-taiga-back
+          - TAIGA_FRONT_HOST=§§INSTANCE-taiga-front
+
+

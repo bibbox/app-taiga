@@ -1,0 +1,121 @@
+version: '2'
+
+services:
+
+  BIBBOX-taiga-back:
+    image: dockertaiga/back
+    container_name: BIBBOX-taiga-back
+    restart: unless-stopped
+    depends_on:
+        - BIBBOX-taiga-db
+        - BIBBOX-taiga-events
+    links:
+        - BIBBOX-taiga-db:db
+    restart: unless-stopped
+    volumes:
+          - ./data/conf/back:/taiga-conf
+          - ./data/media:/taiga-media
+    environment:
+            - TAIGA_HOST=localhost:8010
+            - TAIGA_FRONT_HOST=BIBBOX-taiga-front
+            - EVENTS_HOST=BIBBOX-taiga-events
+            - TAIGA_SECRET=secret
+            - POSTGRES_HOST=BIBBOX-taiga-db
+            - POSTGRES_DB=taiga
+            - POSTGRES_USER=postgres
+            - POSTGRES_PASSWORD=changeforproduction
+            - RABBIT_HOST=BIBBOX-taiga-rabbit
+            - RABBIT_USER=taiga
+            - RABBIT_PASSWORD=changeforproduction
+            - RABBIT_VHOST=taiga 
+            - REDIS_HOST=BIBBOX-taiga-redis
+            - REDIS_DB=0
+            - REDIS_PASSWORD=changeforproduction      
+ 
+  BIBBOX-taiga-front:
+    image: dockertaiga/front
+    container_name: BIBBOX-taiga-front
+    restart: unless-stopped
+    volumes:
+           - ./data/conf/font:/taiga-conf
+    environment:
+            - TAIGA_HOST=localhost:8010
+            - TAIGA_SCHEME=http
+            - TAIGA_BACK_HOST=BIBBOX-taiga-back
+            - TAIGA_FRONT_HOST=BIBBOX-taiga-front
+            - EVENTS_HOST=BIBBOX-taiga-events
+            - TAIGA_SECRET=secret
+            - ENABLE_SSL=no
+  
+  BIBBOX-taiga-db:
+      image: postgres:11-alpine
+      container_name: BIBBOX-taiga-db
+      restart: unless-stopped
+      volumes:
+        - ./data/db:/var/lib/postgresql/data
+      environment:
+          - POSTGRES_HOST=BIBBOX-taiga-db
+          - POSTGRES_DB=taiga
+          - POSTGRES_USER=postgres
+          - POSTGRES_PASSWORD=changeforproduction
+  
+  BIBBOX-taiga-adminer:
+            image: adminer
+            container_name: BIBBOX-taiga-adminer
+            restart: unless-stopped
+            ports:
+              - 8381:8080
+
+  BIBBOX-taiga-rabbit:
+      image: dockertaiga/rabbit
+      container_name: BIBBOX-taiga-rabbit
+      restart: unless-stopped
+      environment:
+        - TAIGA_BACK_HOST=BIBBOX-taiga-back
+        - TAIGA_SECRET=secret
+        - RABBIT_HOST=BIBBOX-taiga-rabbit
+        - RABBIT_USER=taiga
+        - RABBIT_PASSWORD=changeforproduction
+        - RABBIT_VHOST=taiga 
+
+  BIBBOX-taiga-redis:  
+      image: bitnami/redis:5.0
+      container_name: BIBBOX-taiga-redis
+      restart: unless-stopped
+      environment:
+        - REDIS_HOST=BIBBOX-taiga-redis
+        - REDIS_DB=0
+        - REDIS_PASSWORD=changeforproduction
+
+  BIBBOX-taiga-events:          
+      image: dockertaiga/events
+      container_name: BIBBOX-taiga-events
+      restart: unless-stopped
+      depends_on:
+        - BIBBOX-taiga-rabbit  
+      environment:
+          - TAIGA_SECRET=secret
+          - RABBIT_HOST=BIBBOX-taiga-rabbit
+          - RABBIT_USER=taiga
+          - RABBIT_PASSWORD=changeforproduction
+          - RABBIT_VHOST=taiga 
+
+  BIBBOX-taiga-proxy:          
+        image: dockertaiga/proxy
+        container_name: BIBBOX-taiga-proxy
+        restart: unless-stopped
+        ports:
+            - 8010:80
+        depends_on:
+          - BIBBOX-taiga-front
+          - BIBBOX-taiga-back
+          - BIBBOX-taiga-events
+        volumes:
+          - ./data/conf/proxy:/taiga-conf
+        environment:
+          - TAIGA_HOST=localhost:8010
+          - EVENTS_HOST=BIBBOX-taiga-events
+          - TAIGA_BACK_HOST=BIBBOX-taiga-back
+          - TAIGA_FRONT_HOST=BIBBOX-taiga-front
+
+
