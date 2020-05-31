@@ -54,6 +54,7 @@ services:
       volumes:
         - ./data/db:/var/lib/postgresql/data
       environment:
+        - POSTGRES_DB=taiga
         - POSTGRES_USER=postgres
         - POSTGRES_PASSWORD=§§DATABASE_PASSWORD
   
