@@ -125,7 +125,7 @@ services:
           - TAIGA_HOST=localhost:8010
           - EVENTS_HOST=dev-taiga-events
           - TAIGA_BACK_HOST=dev-taiga-back
-          - TAIGA_FRONT_HOST=dev-taiga
+          - TAIGA_FRONT_HOST=dev-taiga-front
 
 
 

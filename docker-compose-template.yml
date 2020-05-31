@@ -26,7 +26,7 @@ services:
         - POSTGRES_PASSWORD=§§DATABASE_PASSWORD
         - RABBIT_HOST=§§INSTANCE-taiga-rabbit
         - RABBIT_USER=taiga
-        - RABBIT_PASSWORD=password
+        - RABBIT_PASSWORD=§§RABBIT_PASSWORD
         - RABBIT_VHOST=taiga 
         - REDIS_HOST=§§INSTANCE-taiga-redis
         - REDIS_DB=0
