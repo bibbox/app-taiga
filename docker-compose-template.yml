@@ -16,7 +16,7 @@ services:
           - ./data/conf/back:/taiga-conf
           - ./data/media:/taiga-media
     environment:
-        - TAIGA_HOST="http://§§INSTANCE.§§DOMAIN"
+        - TAIGA_HOST=§§INSTANCE.§§DOMAIN
         - TAIGA_FRONT_HOST=§§INSTANCE-taiga-front
         - EVENTS_HOST=§§INSTANCE-taiga-events
         - TAIGA_SECRET=secret
@@ -39,7 +39,7 @@ services:
     volumes:
            - ./data/conf/font:/taiga-conf
     environment:
-          - TAIGA_HOST=http://§§INSTANCE.§§DOMAIN
+          - TAIGA_HOST=§§INSTANCE.§§DOMAIN
           - TAIGA_SCHEME=http
           - TAIGA_BACK_HOST=§§INSTANCE-taiga-back
           - TAIGA_FRONT_HOST=§§INSTANCE-taiga-front
@@ -114,7 +114,7 @@ services:
         volumes:
           - ./data/conf/proxy:/taiga-conf
         environment:
-          - TAIGA_HOST=http://§§INSTANCE.§§DOMAIN
+          - TAIGA_HOST=§§INSTANCE.§§DOMAIN
           - EVENTS_HOST=§§INSTANCE-taiga-events
           - TAIGA_BACK_HOST=§§INSTANCE-taiga-back
           - TAIGA_FRONT_HOST=§§INSTANCE-taiga-front
