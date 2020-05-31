@@ -19,7 +19,7 @@ services:
         - TAIGA_HOST=§§INSTANCE.§§DOMAIN
         - TAIGA_FRONT_HOST=§§INSTANCE-taiga-front
         - EVENTS_HOST=§§INSTANCE-taiga-events
-        - TAIGA_SECRET=secret
+        - TAIGA_SECRET=§§SECRET_PHRASE
         - POSTGRES_HOST=§§INSTANCE-taiga-db
         - POSTGRES_DB=taiga
         - POSTGRES_USER=postgres
@@ -54,10 +54,8 @@ services:
       volumes:
         - ./data/db:/var/lib/postgresql/data
       environment:
-          - POSTGRES_HOST=§§INSTANCE-taiga-db
-          - POSTGRES_DB=taiga
-          - POSTGRES_USER=postgres
-          - POSTGRES_PASSWORD=§§DATABASE_PASSWORD
+        - POSTGRES_USER=postgres
+        - POSTGRES_PASSWORD=§§DATABASE_PASSWORD
   
   §§INSTANCE-taiga-adminer:
             image: adminer
