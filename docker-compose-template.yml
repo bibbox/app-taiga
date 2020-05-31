@@ -37,7 +37,7 @@ services:
     container_name: §§INSTANCE-taiga-front
     restart: unless-stopped
     volumes:
-           - ./data/conf/font:/taiga-conf
+           - ./data/conf/front:/taiga-conf
     environment:
           - TAIGA_HOST=§§INSTANCE.§§DOMAIN
           - TAIGA_SCHEME=http
