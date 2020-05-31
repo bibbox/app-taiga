@@ -30,7 +30,7 @@ services:
         - RABBIT_VHOST=taiga 
         - REDIS_HOST=§§INSTANCE-taiga-redis
         - REDIS_DB=0
-        - REDIS_PASSWORD=password      
+        - REDIS_PASSWORD=§§REDIS_PASSWORD  
  
   §§INSTANCE-taiga-front:
     image: dockertaiga/front
