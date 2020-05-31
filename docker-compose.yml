@@ -3,7 +3,7 @@ version: '2'
 services:
 
   BIBBOX-taiga-back:
-    image: dockertaiga/back
+    image: bibbox/taiga-back
     container_name: BIBBOX-taiga-back
     restart: unless-stopped
     depends_on:
@@ -33,7 +33,7 @@ services:
             - REDIS_PASSWORD=changeforproduction      
  
   BIBBOX-taiga-front:
-    image: dockertaiga/front
+    image: bibbox/taiga-front
     container_name: BIBBOX-taiga-front
     restart: unless-stopped
     volumes:
@@ -67,7 +67,7 @@ services:
               - 8381:8080
 
   BIBBOX-taiga-rabbit:
-      image: dockertaiga/rabbit
+      image: bibbox/taiga-rabbit
       container_name: BIBBOX-taiga-rabbit
       restart: unless-stopped
       environment:
@@ -88,7 +88,7 @@ services:
         - REDIS_PASSWORD=changeforproduction
 
   BIBBOX-taiga-events:          
-      image: dockertaiga/events
+      image: bibbox/taiga-events
       container_name: BIBBOX-taiga-events
       restart: unless-stopped
       depends_on:
