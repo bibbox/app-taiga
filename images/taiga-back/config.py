@@ -26,6 +26,11 @@ DATABASES = {
 
 PUBLIC_REGISTER_ENABLED = True
 
+EVENTS_PUSH_BACKEND = "taiga.events.backends.rabbitmq.EventsPushBackend"
+EVENTS_PUSH_BACKEND_OPTIONS = {"url": "amqp://$RABBIT_USER:$RABBIT_PASSWORD@$RABBIT_HOST:$RABBIT_PORT/$RABBIT_VHOST"}
+
+CELERY_ENABLED = True
+
 #DEFAULT_FROM_EMAIL = "john@doe.com"
 #CHANGE_NOTIFICATIONS_MIN_INTERVAL = 300 #seconds
 #EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
@@ -36,7 +41,8 @@ PUBLIC_REGISTER_ENABLED = True
 #EMAIL_HOST_USER = 'user'
 #EMAIL_HOST_PASSWORD = 'password'
 
-EVENTS_PUSH_BACKEND = "taiga.events.backends.rabbitmq.EventsPushBackend"
-EVENTS_PUSH_BACKEND_OPTIONS = {"url": "amqp://$RABBIT_USER:$RABBIT_PASSWORD@$RABBIT_HOST:$RABBIT_PORT/$RABBIT_VHOST"}
+# Uncomment and populate with proper connection parameters
+# for enable github login/singin.
+#GITHUB_API_CLIENT_ID = "yourgithubclientid"
+#GITHUB_API_CLIENT_SECRET = "yourgithubclientsecret"
 
-CELERY_ENABLED = True
