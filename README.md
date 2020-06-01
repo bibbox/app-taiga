@@ -19,7 +19,7 @@ The default port is 8010, you can start Taiga with
 
 * `http://localhost:8010`
 
-The database can viewd with adminer
+The database can be viewed with 
 
 * `http://localhost:8381/?pgsql=BIBBOX-taiga-db&username=postgres&db=taiga&ns=public`
     * Password  `changeforproduction`
