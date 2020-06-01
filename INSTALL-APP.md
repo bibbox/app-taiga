@@ -9,12 +9,12 @@ Please change the password.
 
 ## Add new users
 
+## Configration
 
-## Configration files
+### Email 
+### LDAP
 
-### Email Server
-
-# Backup instructions
+## Backup instructions
 
 * set the env APPID, subdomain of the installed app
 
@@ -35,7 +35,6 @@ Please change the password.
    if you forgot the database root password, you can lookup it in the docker-compose file. 
    
         grep POSTGRES /opt/bibbox/application-instance/${APPID}-app-taiga/docker-compose.yml
-
 
 ## After the installation
 
