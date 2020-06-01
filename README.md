@@ -34,20 +34,29 @@ The BIBBOX framework can be installed
 * [postgres:11-alpine](https://hub.docker.com/_/postgres), offical container
 * [adminer](https://hub.docker.com/_/adminer), offical container
 
-for an alternatiev TAIGA docker and hints on more configuration varaibels  hav a look at [evinsolutions] repository (https://github.com/devinsolutions/docker-taiga) 
+This Taiga Docker is mainly inspired by [docker-taiga](https://github.com/docker-taiga) with input from [evinsolutions](https://github.com/devinsolutions/docker-taiga).
 
-* https://github.com/docker-taiga
-* https://github.com/devinsolutions/docker-taiga
-* http://taigaio.github.io/taiga-doc/dist/
 
+### Documentation
+
+* [Offical TIAGA Documentation](http://taigaio.github.io/taiga-doc/dist/)
+* [TAIGA FAQ](http://taigaio.github.io/taiga-doc/dist/setup-faqs.html)
+* [Upgrade Information (non docker](http://taigaio.github.io/taiga-doc/dist/upgrades.html)
 
 ## Install Environment Variables
 
 * DOMAIN
+* SECRET_PHRASE
+* REDIS_PASSWORD
+* RABBIT_PASSWORD
 * DATABASE_PASSWORD
 
 ## Mounted Volumes
 
-* data/conf
+* data/conf/proxy
+* data/conf/back
+* data/conf/front
 * data/db
+* data/media
+
 
