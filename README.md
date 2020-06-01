@@ -49,7 +49,7 @@ This Taiga Docker is mainly inspired by [docker-taiga](https://github.com/docker
 
 * [Offical TIAGA Documentation](http://taigaio.github.io/taiga-doc/dist/)
 * [TAIGA FAQ](http://taigaio.github.io/taiga-doc/dist/setup-faqs.html)
-* [Upgrade Information (non docker](http://taigaio.github.io/taiga-doc/dist/upgrades.html)
+* [Upgrade Information (without docker)](http://taigaio.github.io/taiga-doc/dist/upgrades.html)
 
 ## Install Environment Variables
 
