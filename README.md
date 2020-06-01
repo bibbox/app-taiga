@@ -15,6 +15,18 @@ Clone the github repsoitory and start the install.sh. If necessary change the po
 
 `sudo ./install.sh`
 
+The default port is 8010, you can start Taiga with
+
+* [http://localhost:8010](http://localhost:8010) 
+
+The database can viewd with adminer
+
+* [http://localhost:8381](http://localhost:8381), the default login is
+    * System    `PostgreSQL`
+    * Server    `BIBBOX-taiga-db`
+    * Username  `postgres`
+    * Password  `changeforproduction`
+    * Database  `postgres`
 
 ## Install within BIBBOX
 
