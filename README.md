@@ -22,11 +22,7 @@ The default port is 8010, you can start Taiga with
 The database can viewd with adminer
 
 * `http://localhost:8381/?pgsql=BIBBOX-taiga-db&username=postgres&db=taiga&ns=public`
-    * System    `PostgreSQL`
-    * Server    `BIBBOX-taiga-db`
-    * Username  `postgres`
     * Password  `changeforproduction`
-    * Database  `postgres`
 
 ## Install within BIBBOX
 
