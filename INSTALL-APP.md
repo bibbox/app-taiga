@@ -20,7 +20,7 @@ Please change the password.
 
         export APPID=taiga
 
-* Backup the database App directory, replace APPID with the id (subdomain) of the installed app. 
+* Backup the App directory, replace APPID with the id (subdomain) of the installed app. 
 
         /opt/bibbox/application-instance/${APPID}-app-taiga
         
@@ -28,7 +28,7 @@ Please change the password.
     
         /opt/bibbox/application-instance/${APPID}-app-taiga/data
         
-* Backup the posgres database with the command
+* Backup the postgres database with the command
        
         docker exec  -t ${APPID}-taiga-db pg_dumpall -c -U postgres > ${APPID}-backup_`date +%d-%m-%Y"_"%H_%M_%S`.sql
 
