@@ -19,10 +19,6 @@ Please change the password.
 * set the env APPID, subdomain of the installed app
 
         export APPID=taiga
-
-* Backup the App directory, replace APPID with the id (subdomain) of the installed app. 
-
-        /opt/bibbox/application-instance/${APPID}-app-taiga
         
 * Backup the whole data directory 
     
