@@ -36,4 +36,4 @@ Please change the password.
 
 Have a nice ride with the new Admins youngtimer.
 
-![FINAL](install-screen-final.jpg)
+![FINAL](assets/install-screen-final.jpg)

@@ -1,15 +1,6 @@
 [
    {
-      "id":"DOMAIN",
-      "display_name":"Server FQDN",
-      "type":"text",
-      "default_value":"silicolab.bibbox.org",
-      "description":"FQDN without the schema, e.g.  silicolab.bibbox.org, in most cases this is the URL of the BIBOX server, execpt if you use a proxy to change the URL. ",
-      "min_length": "1",
-      "max_length": "128"
-   },   
-   {
-      "id":"SECRET_PHRASE",
+      "id":"SECRET_KEY",
       "display_name":"Secret",
       "type":"text",
       "default_value":"changeforproduction",
@@ -18,28 +9,46 @@
       "max_length": "128"
    },  
    {
-      "id":"REDIS_PASSWORD",
-      "display_name":"Redis Password",
+      "id":"ADMIN_USER",
+      "display_name":"Admin User",
       "type":"text",
-      "default_value":"changeforproduction",
-      "description":"Redis Password, please change for production",
+      "default_value":"admin",
+      "description":"Admin Username",
       "min_length": "1",
       "max_length": "128"
    },  
    {
-      "id":"RABBIT_PASSWORD",
-      "display_name":"Rabbit Password",
+      "id":"ADMIN_EMAIL",
+      "display_name":"Admin Email",
       "type":"text",
-      "default_value":"changeforproduction",
+      "default_value":"admin@bibbox.org",
+      "description":"Admin Email",
+      "min_length": "1",
+      "max_length": "128"
+   },  
+   {
+      "id":"ADMIN_PASSWORD",
+      "display_name":"Admin Password",
+      "type":"text",
+      "default_value":"vendetta",
+      "description":"Admin Password",
+      "min_length": "1",
+      "max_length": "128"
+   },  
+   {
+      "id":"RABBITMQ_PASS",
+      "display_name":"RabbitMQ Password",
+      "type":"text",
+      "default_value":"taiga",
       "description":"Rabbit Password,  please change for production",
       "min_length": "1",
       "max_length": "128"
    },  
    {
-      "id":"DATABASE_PASSWORD",
+      "id":"POSTGRES_PASSWORD",
       "display_name":"Postgres Password",
       "type":"text",
-      "default_value":"changeforproduction",
+      "default_value":"taiga",
       "description":"Postgres Password, please change for production",
       "min_length": "1",
       "max_length": "128"

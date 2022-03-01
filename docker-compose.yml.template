@@ -12,11 +12,11 @@ x-environment:
   # Database settings
   POSTGRES_DB: taiga
   POSTGRES_USER: taiga
-  POSTGRES_PASSWORD: taiga
+  POSTGRES_PASSWORD: §§POSTGRES_PASSWORD
   POSTGRES_HOST: taiga-db
   # Taiga settings
-  TAIGA_SECRET_KEY: "taiga-back-secret-key"
-  TAIGA_SITES_DOMAIN: "localhost:9000"
+  TAIGA_SECRET_KEY: §§SECRET_KEY
+  TAIGA_SITES_DOMAIN: "§§INSTANCE.§§BASEURL"
   TAIGA_SITES_SCHEME: "http"
   # Email settings. Uncomment following lines and configure your SMTP server
   # EMAIL_BACKEND: "django.core.mail.backends.smtp.EmailBackend"
@@ -34,9 +34,9 @@ x-environment:
   # Telemetry settings
   ENABLE_TELEMETRY: "True"
   #SuperUser
-  ADMIN_USER: admin
-  ADMIN_EMAIL: admin@bibbox.org
-  ADMIN_PASSWORD: vendetta
+  ADMIN_USER: §§ADMIN_USER
+  ADMIN_EMAIL: §§ADMIN_EMAIL
+  ADMIN_PASSWORD: §§ADMIN_PASSWORD
   
 x-volumes:
   &default-back-volumes
@@ -47,115 +47,111 @@ x-volumes:
   
 
 services:
-  bibbox-taiga-db:
+  §§INSTANCE-taiga-db:
     image: postgres:12.3
-    container_name: bibbox-taiga-db
+    container_name: §§INSTANCE-taiga-db
     environment:
       POSTGRES_DB: taiga
       POSTGRES_USER: taiga
-      POSTGRES_PASSWORD: taiga
+      POSTGRES_PASSWORD: §§POSTGRES_PASSWORD
     volumes:
       - ./data/taiga-db-data:/var/lib/postgresql/data
     networks:
       - bibbox-default-network
 
-  bibbox-taiga-back:
+  §§INSTANCE-taiga-back:
     image: taigaio/taiga-back:6.5.1
-    container_name: bibbox-taiga-back
+    container_name: §§INSTANCE-taiga-back
     environment: *default-back-environment
     volumes: *default-back-volumes
     networks:
       - bibbox-default-network
     depends_on:
-      - bibbox-taiga-db
-      - bibbox-taiga-events-rabbitmq
-      - bibbox-taiga-async-rabbitmq
+      - §§INSTANCE-taiga-db
+      - §§INSTANCE-taiga-events-rabbitmq
+      - §§INSTANCE-taiga-async-rabbitmq
     links:
-      - bibbox-taiga-db:taiga-db
-      - bibbox-taiga-events-rabbitmq:taiga-events-rabbitmq
-      - bibbox-taiga-async-rabbitmq:taiga-async-rabbitmq
+      - §§INSTANCE-taiga-db:taiga-db
+      - §§INSTANCE-taiga-events-rabbitmq:taiga-events-rabbitmq
+      - §§INSTANCE-taiga-async-rabbitmq:taiga-async-rabbitmq
 
-  bibbox-taiga-create-admin:
+  §§INSTANCE-taiga-create-admin:
     image: taigaio/taiga-back:6.5.1
-    container_name: bibbox-taiga-create-admin
+    container_name: §§INSTANCE-taiga-create-admin
     environment: *default-back-environment
-      
     depends_on:
-      - bibbox-taiga-db
-      - bibbox-taiga-back
-      - bibbox-taiga-async
-      - bibbox-taiga-events
-      - bibbox-taiga-front
-    #entrypoint: "python create_admin.py"
-    #entrypoint: "python manage.py createsuperuser --username=admin --email=admin@admin.com --noinput"
-    #entrypoint: bash -c "printf 'admin\nadmin@bibbox.org\nvendetta\nvendetta\n' | python manage.py createsuperuser"
+      - §§INSTANCE-taiga-db
+      - §§INSTANCE-taiga-back
+      - §§INSTANCE-taiga-async
+      - §§INSTANCE-taiga-events
+      - §§INSTANCE-taiga-front
     entrypoint: bash -c "cat create_admin.py | python manage.py shell"
     volumes: *default-back-volumes
     networks:
       - bibbox-default-network
       
-  bibbox-taiga-async:
+  §§INSTANCE-taiga-async:
     image: taigaio/taiga-back:6.5.1
-    container_name: bibbox-taiga-async
+    container_name: §§INSTANCE-taiga-async
     entrypoint: ["/taiga-back/docker/async_entrypoint.sh"]
     environment: *default-back-environment
     volumes: *default-back-volumes
     networks:
       - bibbox-default-network
     depends_on:
-      - bibbox-taiga-db
-      - bibbox-taiga-back
-      - bibbox-taiga-async-rabbitmq
+      - §§INSTANCE-taiga-db
+      - §§INSTANCE-taiga-back
+      - §§INSTANCE-taiga-async-rabbitmq
     links:
-      - bibbox-taiga-db:taiga-db
-      - bibbox-taiga-back:taiga-back
-      - bibbox-taiga-async-rabbitmq:taiga-async-rabbitmq
+      - §§INSTANCE-taiga-db:taiga-db
+      - §§INSTANCE-taiga-back:taiga-back
+      - §§INSTANCE-taiga-async-rabbitmq:taiga-async-rabbitmq
 
-  bibbox-taiga-async-rabbitmq:
+  §§INSTANCE-taiga-async-rabbitmq:
     image: rabbitmq:3-management-alpine
-    container_name: bibbox-taiga-async-rabbitmq
+    container_name: §§INSTANCE-taiga-async-rabbitmq
     environment:
       RABBITMQ_ERLANG_COOKIE: secret-erlang-cookie
       RABBITMQ_DEFAULT_USER: taiga
-      RABBITMQ_DEFAULT_PASS: taiga
+      RABBITMQ_DEFAULT_PASS: §§RABBITMQ_PASS
       RABBITMQ_DEFAULT_VHOST: taiga
     volumes:
       - ./data/taiga-async-rabbitmq-data:/var/lib/rabbitmq
     networks:
       - bibbox-default-network
 
-  bibbox-taiga-front:
+  §§INSTANCE-taiga-front:
     image: taigaio/taiga-front:6.5.1
-    container_name: bibbox-taiga-front
+    container_name: §§INSTANCE-taiga-front
     environment:
-      TAIGA_URL: "http://localhost:9000"
-      TAIGA_WEBSOCKETS_URL: "ws://localhost:9000"
+      TAIGA_URL: "http://§§INSTANCE.§§BASEURL"
+      TAIGA_WEBSOCKETS_URL: "ws://§§INSTANCE.§§BASEURL"
     networks:
       - bibbox-default-network
     # volumes:
     #   - ./conf.json:/usr/share/nginx/html/conf.json
 
-  bibbox-taiga-events:
+  §§INSTANCE-taiga-events:
     image: taigaio/taiga-events:6.5.1
-    container_name: bibbox-taiga-events
+    container_name: §§INSTANCE-taiga-events
     environment:
       RABBITMQ_USER: taiga
-      RABBITMQ_PASS: taiga
-      TAIGA_SECRET_KEY: "taiga-back-secret-key"
+      RABBITMQ_PASS: §§RABBITMQ_PASS
+      TAIGA_SECRET_KEY: §§SECRET_KEY
     networks:
       - bibbox-default-network
     depends_on:
-      - bibbox-taiga-events-rabbitmq
+      - §§INSTANCE-taiga-events-rabbitmq
     links:
-      - bibbox-taiga-events-rabbitmq:taiga-events-rabbitmq
+      - §§INSTANCE-taiga-events-rabbitmq:taiga-events-rabbitmq
 
-  bibbox-taiga-events-rabbitmq:
+  §§INSTANCE-taiga-events-rabbitmq:
     image: rabbitmq:3-management-alpine
-    container_name: bibbox-taiga-events-rabbitmq
+    container_name: §§INSTANCE-taiga-events-rabbitmq
     environment:
       RABBITMQ_ERLANG_COOKIE: secret-erlang-cookie
       RABBITMQ_DEFAULT_USER: taiga
-      RABBITMQ_DEFAULT_PASS: taiga
+      RABBITMQ_DEFAULT_PASS: §§RABBITMQ_PASS
       RABBITMQ_DEFAULT_VHOST: taiga
     volumes:
       - ./data/taiga-events-rabbitmq-data:/var/lib/rabbitmq
@@ -164,16 +160,16 @@ services:
 
   taiga-protected:
     image: taigaio/taiga-protected:6.5.1
-    container_name: bibbox-taiga-protected
+    container_name: §§INSTANCE-taiga-protected
     environment:
       MAX_AGE: 360
-      SECRET_KEY: "taiga-back-secret-key"
+      SECRET_KEY: §§SECRET_KEY
     networks:
       - bibbox-default-network
 
-  bibbox-taiga-gateway:
+  §§INSTANCE-taiga-gateway:
     image: nginx:1.19-alpine
-    container_name: bibbox-taiga-gateway
+    container_name: §§INSTANCE-taiga-gateway
     ports:
       - "9000:80"
     volumes:
@@ -183,13 +179,19 @@ services:
     networks:
       - bibbox-default-network
     depends_on:
-      - bibbox-taiga-front
-      - bibbox-taiga-back
-      - bibbox-taiga-events
+      - §§INSTANCE-taiga-front
+      - §§INSTANCE-taiga-back
+      - §§INSTANCE-taiga-events
     links:
-      - bibbox-taiga-front:taiga-front
-      - bibbox-taiga-back:taiga-back
-      - bibbox-taiga-events:taiga-events
+      - §§INSTANCE-taiga-front:taiga-front
+      - §§INSTANCE-taiga-back:taiga-back
+      - §§INSTANCE-taiga-events:taiga-events
+    proxy:
+     TYPE: PRIMARY
+     URLPREFIX: §§INSTANCE
+     TEMPLATE: websocket
+     DISPLAYNAME: 'TAIGA'  
+    
     
 
 
