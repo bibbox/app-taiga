@@ -87,6 +87,8 @@ services:
       - §§INSTANCE-taiga-front
     links:
       - §§INSTANCE-taiga-db:taiga-db
+      - §§INSTANCE-taiga-events-rabbitmq:taiga-events-rabbitmq
+      - §§INSTANCE-taiga-async-rabbitmq:taiga-async-rabbitmq
     entrypoint: bash -c "cat create_admin.py | python manage.py shell"
     volumes: *default-back-volumes
     networks:
