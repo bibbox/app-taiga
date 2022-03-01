@@ -85,6 +85,8 @@ services:
       - §§INSTANCE-taiga-async
       - §§INSTANCE-taiga-events
       - §§INSTANCE-taiga-front
+    links:
+      - §§INSTANCE-taiga-db:taiga-db
     entrypoint: bash -c "cat create_admin.py | python manage.py shell"
     volumes: *default-back-volumes
     networks:
