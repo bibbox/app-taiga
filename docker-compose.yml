@@ -86,6 +86,10 @@ services:
       - bibbox-taiga-async
       - bibbox-taiga-events
       - bibbox-taiga-front
+    links:
+      - bibbox-taiga-db:taiga-db
+      - bibbox-taiga-events-rabbitmq:taiga-events-rabbitmq
+      - bibbox-taiga-async-rabbitmq:taiga-async-rabbitmq
     #entrypoint: "python create_admin.py"
     #entrypoint: "python manage.py createsuperuser --username=admin --email=admin@admin.com --noinput"
     #entrypoint: bash -c "printf 'admin\nadmin@bibbox.org\nvendetta\nvendetta\n' | python manage.py createsuperuser"
