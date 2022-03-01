@@ -193,7 +193,7 @@ services:
      URLPREFIX: §§INSTANCE
      TEMPLATE: websocket
      DISPLAYNAME: 'TAIGA'  
-     PATH_TO_SOCKET: '/api'
+     PATH_TO_SOCKET: '/events'
     
     
 
