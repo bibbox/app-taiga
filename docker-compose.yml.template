@@ -16,7 +16,7 @@ x-environment:
   POSTGRES_HOST: taiga-db
   # Taiga settings
   TAIGA_SECRET_KEY: §§SECRET_KEY
-  TAIGA_SITES_DOMAIN: "§§INSTANCE.§§BASEURL"
+  TAIGA_SITES_DOMAIN: "§§INSTANCE.§§BASEURL:80"
   TAIGA_SITES_SCHEME: "http"
   # Email settings. Uncomment following lines and configure your SMTP server
   # EMAIL_BACKEND: "django.core.mail.backends.smtp.EmailBackend"
@@ -195,7 +195,7 @@ services:
      URLPREFIX: §§INSTANCE
      TEMPLATE: websocket
      DISPLAYNAME: 'TAIGA'  
-     PATH_TO_SOCKET: '/'
+     PATH_TO_SOCKET: '/events'
     
     
 
