@@ -97,7 +97,8 @@ services:
     volumes: *default-back-volumes
     networks:
       - bibbox-default-network
-      
+    restart: on-failure
+    
   bibbox-taiga-async:
     image: taigaio/taiga-back:6.5.0
     container_name: bibbox-taiga-async
