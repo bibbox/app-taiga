@@ -52,6 +52,84 @@
       "description":"Postgres Password, please change for production",
       "min_length": "1",
       "max_length": "128"
+   },  
+   {
+      "id":"DEFAULT_FROM_EMAIL",
+      "display_name":"Email default from ",
+      "type":"text",
+      "default_value":"no-reply@example.com",
+      "description":"Email",
+      "min_length": "1",
+      "max_length": "128"
+   },  
+   {
+      "id":"EMAIL_USE_TLS",
+      "display_name":"Email TLS",
+      "type":"text",
+      "default_value":"False",
+      "description":"TLS",
+      "min_length": "1",
+      "max_length": "128"
+   },  
+   {
+      "id":"EMAIL_USE_SSL",
+      "display_name":"Email SSL",
+      "type":"text",
+      "default_value":"False",
+      "description":"SSL",
+      "min_length": "1",
+      "max_length": "128"
+   },  
+   {
+      "id":"EMAIL_HOST",
+      "display_name":"EMAIL HOST SERVER",
+      "type":"text",
+      "default_value":"smtp.host.example.com",
+      "description":"Email server",
+      "min_length": "1",
+      "max_length": "128"
+   },  
+   {
+      "id":"EMAIL_PORT",
+      "display_name":"Email Port",
+      "type":"text",
+      "default_value":"587",
+      "description":"Port",
+      "min_length": "1",
+      "max_length": "128"
+   },  
+   {
+      "id":"EMAIL_HOST_USER",
+      "display_name":"Email Username",
+      "type":"text",
+      "default_value":"user",
+      "description":"Username",
+      "min_length": "1",
+      "max_length": "128"
+   },  
+   {
+      "id":"EMAIL_HOST_PASSWORD",
+      "display_name":"Email Password",
+      "type":"text",
+      "default_value":"password",
+      "description":"Password",
+      "min_length": "1",
+      "max_length": "128"
+   },  
+   {
+      "id":"PUBLIC_REGISTER_ENABLED",
+      "display_name":"PUBLIC REGISTER",
+      "type":"text",
+      "default_value":"False",
+      "description":"PUBLIC REGISTER (True or False)",
+      "min_length": "1",
+      "max_length": "128"
    }
+
+
+
+
+
+
 
 ]

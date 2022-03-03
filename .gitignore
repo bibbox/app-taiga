@@ -4,3 +4,4 @@
 /data/taiga-db-data
 /data/taiga-async-rabbitmq-data
 /data/taiga-gateway/taiga.conf
+docker-compose-test.yml
