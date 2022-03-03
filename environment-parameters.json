@@ -66,8 +66,8 @@
       "id":"EMAIL_USE_TLS",
       "display_name":"Email TLS",
       "type":"text",
-      "default_value":"False",
-      "description":"TLS",
+      "default_value":"\"True\"",
+      "description":"TLS (\"True\" or \"False\")",
       "min_length": "1",
       "max_length": "128"
    },  
@@ -75,8 +75,8 @@
       "id":"EMAIL_USE_SSL",
       "display_name":"Email SSL",
       "type":"text",
-      "default_value":"False",
-      "description":"SSL",
+      "default_value":"\"False\"",
+      "description":"SSL (\"True\" or \"False\")",
       "min_length": "1",
       "max_length": "128"
    },  
@@ -120,8 +120,8 @@
       "id":"PUBLIC_REGISTER_ENABLED",
       "display_name":"PUBLIC REGISTER",
       "type":"text",
-      "default_value":"False",
-      "description":"PUBLIC REGISTER (True or False)",
+      "default_value":"\"False\"",
+      "description":"PUBLIC REGISTER (\"True\" or \"False\")",
       "min_length": "1",
       "max_length": "128"
    }
