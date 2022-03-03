@@ -99,7 +99,7 @@
       "max_length": "128"
    },  
    {
-      "id":"EMAIL_HOST_USER",
+      "id":"EMAIL_USER",
       "display_name":"Email Username",
       "type":"text",
       "default_value":"user",
@@ -108,7 +108,7 @@
       "max_length": "128"
    },  
    {
-      "id":"EMAIL_HOST_PASSWORD",
+      "id":"EMAIL_PASSWORD",
       "display_name":"Email Password",
       "type":"password",
       "default_value":"password",
