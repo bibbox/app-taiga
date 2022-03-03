@@ -29,7 +29,7 @@
    {
       "id":"ADMIN_PASSWORD",
       "display_name":"Admin Password",
-      "type":"text",
+      "type":"password",
       "default_value":"vendetta",
       "description":"Admin Password",
       "min_length": "1",
@@ -38,7 +38,7 @@
    {
       "id":"RABBITMQ_PASS",
       "display_name":"RabbitMQ Password",
-      "type":"text",
+      "type":"password",
       "default_value":"taiga",
       "description":"Rabbit Password,  please change for production",
       "min_length": "1",
@@ -47,7 +47,7 @@
    {
       "id":"POSTGRES_PASSWORD",
       "display_name":"Postgres Password",
-      "type":"text",
+      "type":"password",
       "default_value":"taiga",
       "description":"Postgres Password, please change for production",
       "min_length": "1",
@@ -110,7 +110,7 @@
    {
       "id":"EMAIL_HOST_PASSWORD",
       "display_name":"Email Password",
-      "type":"text",
+      "type":"password",
       "default_value":"password",
       "description":"Password",
       "min_length": "1",
