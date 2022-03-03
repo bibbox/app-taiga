@@ -3,3 +3,4 @@
 /data/taiga-events-rabbitmq-data
 /data/taiga-db-data
 /data/taiga-async-rabbitmq-data
+/data/taiga-gateway/taiga.conf
