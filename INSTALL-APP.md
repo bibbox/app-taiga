@@ -45,6 +45,10 @@ Default disabled. Can be changed in the docker-compose.yml file: Uncomment follo
 *  EMAIL_HOST_USER: "user"
 *  EMAIL_HOST_PASSWORD: "password"
 
+If taiga was already running you need to restart it after the chnages are saved:
+*  `docker-compose down`
+*  `docker-compose up -d`
+
 #### BIBBOX
 
 * Set during installation
@@ -58,7 +62,9 @@ On default is the standalone version running on `http`. This can be changed in t
 *  TAIGA_URL: "https://localhost:9000"
 *  TAIGA_WEBSOCKETS_URL: "wss://localhost:9000"
 
-
+If taiga was already running you need to restart it after the chnages are saved:
+*  `docker-compose down`
+*  `docker-compose up -d`
 
 #### BIBBOX
 
@@ -66,6 +72,13 @@ On default is the BIBBOX version running on `http`. This can be changed in the `
 *  TAIGA_SITES_SCHEME: "http"
 *  TAIGA_URL: "http://§§INSTANCE.§§BASEURL"
 *  TAIGA_WEBSOCKETS_URL: "ws://§§INSTANCE.§§BASEURL"
+
+If taiga was already running you need to restart it after the chnages are saved:
+*  `docker-compose down`
+*  `docker-compose up -d`
+
+You might also need to restart the bibbox proxy:
+*  `docker exec bibbox-sys-commander-apacheproxy httpd -k graceful` or `docker exec bibbox-sys-commander-apacheproxy apache2ctl -k graceful`
 
 
 ## After the installation
