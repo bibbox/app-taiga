@@ -5,3 +5,5 @@
 /data/taiga-async-rabbitmq-data
 /data/taiga-gateway/taiga.conf
 docker-compose-test.yml
+config.py
+config_robert.py
