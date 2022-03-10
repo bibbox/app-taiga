@@ -17,7 +17,7 @@ x-environment:
   # Taiga settings
   TAIGA_SECRET_KEY: §§SECRET_KEY
   TAIGA_SITES_DOMAIN: "§§INSTANCE.§§BASEURL"
-  TAIGA_SITES_SCHEME: "http"
+  TAIGA_SITES_SCHEME: "https"
   # Email settings. Uncomment following lines and configure your SMTP server
   EMAIL_BACKEND: "django.core.mail.backends.smtp.EmailBackend"
   DEFAULT_FROM_EMAIL: §§DEFAULT_FROM_EMAIL
@@ -131,8 +131,8 @@ services:
     image: taigaio/taiga-front:6.5.0
     container_name: §§INSTANCE-taiga-front
     environment:
-      TAIGA_URL: "http://§§INSTANCE.§§BASEURL"
-      TAIGA_WEBSOCKETS_URL: "ws://§§INSTANCE.§§BASEURL"
+      TAIGA_URL: "https://§§INSTANCE.§§BASEURL"
+      TAIGA_WEBSOCKETS_URL: "wss://§§INSTANCE.§§BASEURL"
     networks:
       - bibbox-default-network
     # volumes:
