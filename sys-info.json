@@ -1,6 +1,0 @@
-{
-  runningcontainers:["§§INSTANCE-taiga-back",  "§§INSTANCE-taiga-front", "§§INSTANCE-taiga-db", 
-                     "§§INSTANCE-taiga-proxy", "§§INSTANCE-taiga-events", "§§INSTANCE-taiga-rabbit",
-                     "§§INSTANCE-taiga-redis", "§§INSTANCE-taiga-adminer" ],
-  supportcontainers:[]    
-}

@@ -2,8 +2,8 @@
 
 This container can be installed as [BIBBOX APP](http://bibbox.readthedocs.io/en/latest/admin-documentation/ "BIBBOX App Store") or standalone. 
 
-* initial user/passwordd: **admin / 123123**
-* after the docker installation follow these [instructions](https://github.com/bibbox/app-taiga/blob/master/INSTALL-APP.md)
+* initial user/password: **admin / vendetta** 
+* after the docker installation follow these [instructions](INSTALL-APP.md)
 
 ## Standalone Installation
 
@@ -15,34 +15,24 @@ Clone the github repsoitory and start the install.sh. If necessary change the po
 
 `sudo ./install.sh`
 
-The default port is 8010, you can start Taiga with
+The default port is 9000, you can start Taiga with
 
-* `http://localhost:8010`
+* `http://localhost:9000`
 
-The database can be viewed with 
-
-* `http://localhost:8381/?pgsql=BIBBOX-taiga-db&username=postgres&db=taiga&ns=public`
-    * **Password**  `changeforproduction`
 
 ## Install within BIBBOX
 
-The BIBBOX framework can be installed 
-* as a [virtual machine](http://bibbox.bbmri-eric.eu/resources/machine/), 
-* using [vagrant/puppet](http://bibbox.readthedocs.io/en/latest/installation-vagrant/) 
-* are on any Ubuntu System following these [instructions](http://bibbox.readthedocs.io/en/latest/installation-source/)  
+Within BIBBOX you can use the [BIBBOX](https://bibbox.readthedocs.io/en/latest/ "BIBBOX") to install a lot of software tools. After the installation is finished you can start your application in the dashboard and follow these further [instructions](INSTALL-APP.md).
 
 
 ## Docker Images Used
-* [bibbox/taiga-front](https://hub.docker.com/r/bibbox/taiga-front) 
-* [bibbox/taiga-back](https://hub.docker.com/r/bibbox/taiga-back) 
-* [bibbox/taiga-proxy](https://hub.docker.com/r/bibbox/taiga-proxy) 
-* [bibbox/taiga-rabbit](https://hub.docker.com/r/bibbox/taiga-rabbit) 
-* [bibbox/taiga-event](https://hub.docker.com/r/bibbox/taiga-event) 
-* [bitnami/redis:5.0](https://hub.docker.com/r/bitnami/redis), offical container
-* [postgres:11-alpine](https://hub.docker.com/_/postgres), offical container
-* [adminer](https://hub.docker.com/_/adminer), offical container
-
-This Taiga Docker is mainly inspired by [docker-taiga](https://github.com/docker-taiga) with input from [evinsolutions](https://github.com/devinsolutions/docker-taiga).
+* [taigaio/taiga-front](https://hub.docker.com/r/taigaio/taiga-front) 
+* [taigaio/taiga-back](https://hub.docker.com/r/taigaio/taiga-back) 
+* [taigaio/taiga-protected](https://hub.docker.com/r/taigaio/taiga-protected) 
+* [taigaio/taiga-events](https://hub.docker.com/r/taigaio/taiga-events) 
+* [rabbitmq](https://hub.docker.com/r/_/rabbitmq), offical container 
+* [postgres](https://hub.docker.com/_/postgres), offical container
+* [nginx](https://hub.docker.com/r/_/nginx), offical container 
 
 
 ### Documentation
@@ -53,11 +43,20 @@ This Taiga Docker is mainly inspired by [docker-taiga](https://github.com/docker
 
 ## Install Environment Variables
 
-* DOMAIN
-* SECRET_PHRASE
-* REDIS_PASSWORD
-* RABBIT_PASSWORD
-* DATABASE_PASSWORD
+* SECRET_KEY
+* ADMIN_USER
+* ADMIN_EMAIL
+* ADMIN_PASSWORD
+* RABBITMQ_PASS
+* POSTGRES_PASSWORD
+* DEFAULT_FROM_EMAIL
+* EMAIL_USE_TLS
+* EMAIL_USE_SSL
+* EMAIL_HOST
+* EMAIL_PORT
+* EMAIL_USER
+* EMAIL_PASSWORD
+* PUBLIC_REGISTER_ENABLED
 
 ## Mounted Volumes
 

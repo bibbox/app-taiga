@@ -1,0 +1,9 @@
+/data/taiga-media-data
+/data/taiga-static-data
+/data/taiga-events-rabbitmq-data
+/data/taiga-db-data
+/data/taiga-async-rabbitmq-data
+/data/taiga-gateway/taiga.conf
+docker-compose-test.yml
+config.py
+config_robert.py

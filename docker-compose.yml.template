@@ -1,0 +1,207 @@
+version: "3.5"
+
+networks:
+  bibbox-default-network:
+    external: true
+
+
+
+
+x-environment:
+  &default-back-environment
+  # Database settings
+  POSTGRES_DB: taiga
+  POSTGRES_USER: taiga
+  POSTGRES_PASSWORD: §§POSTGRES_PASSWORD
+  POSTGRES_HOST: taiga-db
+  # Taiga settings
+  TAIGA_SECRET_KEY: §§SECRET_KEY
+  TAIGA_SITES_DOMAIN: "§§INSTANCE.§§BASEURL"
+  TAIGA_SITES_SCHEME: "https"
+  # Email settings. Uncomment following lines and configure your SMTP server
+  EMAIL_BACKEND: "django.core.mail.backends.smtp.EmailBackend"
+  DEFAULT_FROM_EMAIL: §§DEFAULT_FROM_EMAIL
+  EMAIL_USE_TLS: §§EMAIL_USE_TLS
+  EMAIL_USE_SSL: §§EMAIL_USE_SSL
+  EMAIL_HOST: §§EMAIL_HOST
+  EMAIL_PORT: §§EMAIL_PORT
+  EMAIL_HOST_USER: §§EMAIL_USER
+  EMAIL_HOST_PASSWORD: §§EMAIL_PASSWORD
+  # Rabbitmq settings
+  # Should be the same as in taiga-async-rabbitmq and taiga-events-rabbitmq
+  RABBITMQ_USER: taiga
+  RABBITMQ_PASS: §§RABBITMQ_PASS
+  # Telemetry settings
+  ENABLE_TELEMETRY: "True"
+  #SuperUser
+  ADMIN_USER: §§ADMIN_USER
+  ADMIN_EMAIL: §§ADMIN_EMAIL
+  ADMIN_PASSWORD: §§ADMIN_PASSWORD
+  #Enable Celery
+  PUBLIC_REGISTER_ENABLED: §§PUBLIC_REGISTER_ENABLED
+  
+x-volumes:
+  &default-back-volumes
+  - ./data/taiga-static-data:/taiga-back/static
+  - ./data/taiga-media-data:/taiga-back/media
+  - ./data/create_admin.py:/taiga-back/create_admin.py
+  # - ./config.py:/taiga-back/settings/config.py
+  
+
+services:
+  §§INSTANCE-taiga-db:
+    image: postgres:12.3
+    container_name: §§INSTANCE-taiga-db
+    environment:
+      POSTGRES_DB: taiga
+      POSTGRES_USER: taiga
+      POSTGRES_PASSWORD: §§POSTGRES_PASSWORD
+    volumes:
+      - ./data/taiga-db-data:/var/lib/postgresql/data
+    networks:
+      - bibbox-default-network
+
+  §§INSTANCE-taiga-back:
+    image: taigaio/taiga-back:6.5.0
+    container_name: §§INSTANCE-taiga-back
+    environment: *default-back-environment
+    volumes: *default-back-volumes
+    networks:
+      - bibbox-default-network
+    depends_on:
+      - §§INSTANCE-taiga-db
+      - §§INSTANCE-taiga-events-rabbitmq
+      - §§INSTANCE-taiga-async-rabbitmq
+    links:
+      - §§INSTANCE-taiga-db:taiga-db
+      - §§INSTANCE-taiga-events-rabbitmq:taiga-events-rabbitmq
+      - §§INSTANCE-taiga-async-rabbitmq:taiga-async-rabbitmq
+
+  §§INSTANCE-taiga-create-admin:
+    image: taigaio/taiga-back:6.5.0
+    container_name: §§INSTANCE-taiga-create-admin
+    environment: *default-back-environment
+    depends_on:
+      - §§INSTANCE-taiga-db
+      - §§INSTANCE-taiga-back
+      - §§INSTANCE-taiga-async
+      - §§INSTANCE-taiga-events
+      - §§INSTANCE-taiga-front
+    links:
+      - §§INSTANCE-taiga-db:taiga-db
+      - §§INSTANCE-taiga-events-rabbitmq:taiga-events-rabbitmq
+      - §§INSTANCE-taiga-async-rabbitmq:taiga-async-rabbitmq
+    entrypoint: bash -c "cat create_admin.py | python manage.py shell"
+    volumes: *default-back-volumes
+    networks:
+      - bibbox-default-network
+    restart: on-failure
+      
+  §§INSTANCE-taiga-async:
+    image: taigaio/taiga-back:6.5.0
+    container_name: §§INSTANCE-taiga-async
+    entrypoint: ["/taiga-back/docker/async_entrypoint.sh"]
+    environment: *default-back-environment
+    volumes: *default-back-volumes
+    networks:
+      - bibbox-default-network
+    depends_on:
+      - §§INSTANCE-taiga-db
+      - §§INSTANCE-taiga-back
+      - §§INSTANCE-taiga-async-rabbitmq
+    links:
+      - §§INSTANCE-taiga-db:taiga-db
+      - §§INSTANCE-taiga-back:taiga-back
+      - §§INSTANCE-taiga-async-rabbitmq:taiga-async-rabbitmq
+
+  §§INSTANCE-taiga-async-rabbitmq:
+    image: rabbitmq:3-management-alpine
+    container_name: §§INSTANCE-taiga-async-rabbitmq
+    environment:
+      RABBITMQ_ERLANG_COOKIE: secret-erlang-cookie
+      RABBITMQ_DEFAULT_USER: taiga
+      RABBITMQ_DEFAULT_PASS: §§RABBITMQ_PASS
+      RABBITMQ_DEFAULT_VHOST: taiga
+    volumes:
+      - ./data/taiga-async-rabbitmq-data:/var/lib/rabbitmq
+    networks:
+      - bibbox-default-network
+
+  §§INSTANCE-taiga-front:
+    image: taigaio/taiga-front:6.5.0
+    container_name: §§INSTANCE-taiga-front
+    environment:
+      TAIGA_URL: "https://§§INSTANCE.§§BASEURL"
+      TAIGA_WEBSOCKETS_URL: "wss://§§INSTANCE.§§BASEURL"
+    networks:
+      - bibbox-default-network
+    # volumes:
+    #   - ./conf.json:/usr/share/nginx/html/conf.json
+
+  §§INSTANCE-taiga-events:
+    image: taigaio/taiga-events:6.5.0
+    container_name: §§INSTANCE-taiga-events
+    environment:
+      RABBITMQ_USER: taiga
+      RABBITMQ_PASS: §§RABBITMQ_PASS
+      TAIGA_SECRET_KEY: §§SECRET_KEY
+    networks:
+      - bibbox-default-network
+    depends_on:
+      - §§INSTANCE-taiga-events-rabbitmq
+    links:
+      - §§INSTANCE-taiga-events-rabbitmq:taiga-events-rabbitmq
+
+  §§INSTANCE-taiga-events-rabbitmq:
+    image: rabbitmq:3-management-alpine
+    container_name: §§INSTANCE-taiga-events-rabbitmq
+    environment:
+      RABBITMQ_ERLANG_COOKIE: secret-erlang-cookie
+      RABBITMQ_DEFAULT_USER: taiga
+      RABBITMQ_DEFAULT_PASS: §§RABBITMQ_PASS
+      RABBITMQ_DEFAULT_VHOST: taiga
+    volumes:
+      - ./data/taiga-events-rabbitmq-data:/var/lib/rabbitmq
+    networks:
+      - bibbox-default-network
+
+  taiga-protected:
+    image: taigaio/taiga-protected:6.5.0
+    container_name: §§INSTANCE-taiga-protected
+    environment:
+      MAX_AGE: 360
+      SECRET_KEY: §§SECRET_KEY
+    networks:
+      - bibbox-default-network
+
+  §§INSTANCE-taiga-gateway:
+    image: nginx:1.19-alpine
+    container_name: §§INSTANCE-taiga-gateway
+    ports:
+      - "9000:80"
+    volumes:
+      - ./data/taiga-gateway/nginx.conf:/etc/nginx/conf.d/default.conf
+      - ./data/taiga-gateway/proxy_params:/etc/nginx/proxy_params
+      - ./data/taiga-static-data:/taiga/static
+      - ./data/taiga-media-data:/taiga/media
+    networks:
+      - bibbox-default-network
+    depends_on:
+      - §§INSTANCE-taiga-front
+      - §§INSTANCE-taiga-back
+      - §§INSTANCE-taiga-events
+    links:
+      - §§INSTANCE-taiga-front:taiga-front
+      - §§INSTANCE-taiga-back:taiga-back
+      - §§INSTANCE-taiga-events:taiga-events
+    proxy:
+     TYPE: PRIMARY
+     URLPREFIX: §§INSTANCE
+     TEMPLATE: websocket
+     DISPLAYNAME: 'TAIGA'  
+     PATH_TO_SOCKET: '/events'
+    
+    
+
+
+
