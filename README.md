@@ -9,11 +9,11 @@ This container can be installed as [BIBBOX APP](http://bibbox.readthedocs.io/en/
 
 Clone the github repsoitory and start the install.sh. If necessary change the ports and volume mounts in `docker-compose.yml`.  
 
-`sudo git clone https://github.com/bibbox/app-taiga`
-
-`sudo chmod +x install.sh`
-
-`sudo ./install.sh`
+```
+sudo git clone https://github.com/bibbox/app-taiga
+sudo chmod +x install.sh
+sudo ./install.sh
+```
 
 The default port is 9000, you can start Taiga with
 
