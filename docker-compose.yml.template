@@ -4,9 +4,6 @@ networks:
   bibbox-default-network:
     external: true
 
-
-
-
 x-environment:
   &default-back-environment
   # Database settings
@@ -56,29 +53,34 @@ services:
       POSTGRES_DB: taiga
       POSTGRES_USER: taiga
       POSTGRES_PASSWORD: §§POSTGRES_PASSWORD
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER}"]
+      interval: 2s
+      timeout: 15s
+      retries: 5
+      start_period: 3s
     volumes:
       - ./data/taiga-db-data:/var/lib/postgresql/data
     networks:
       - bibbox-default-network
 
   §§INSTANCE-taiga-back:
-    image: taigaio/taiga-back:6.5.0
+    image: taigaio/taiga-back:6.6.2
     container_name: §§INSTANCE-taiga-back
     environment: *default-back-environment
     volumes: *default-back-volumes
     networks:
       - bibbox-default-network
     depends_on:
-      - §§INSTANCE-taiga-db
-      - §§INSTANCE-taiga-events-rabbitmq
-      - §§INSTANCE-taiga-async-rabbitmq
-    links:
-      - §§INSTANCE-taiga-db:taiga-db
-      - §§INSTANCE-taiga-events-rabbitmq:taiga-events-rabbitmq
-      - §§INSTANCE-taiga-async-rabbitmq:taiga-async-rabbitmq
+      §§INSTANCE-taiga-db:
+        condition: service_healthy
+      §§INSTANCE-taiga-events-rabbitmq:
+        condition: service_healthy
+      §§INSTANCE-taiga-async-rabbitmq:
+        condition: service_healthy
 
   §§INSTANCE-taiga-create-admin:
-    image: taigaio/taiga-back:6.5.0
+    image: taigaio/taiga-back:6.6.2
     container_name: §§INSTANCE-taiga-create-admin
     environment: *default-back-environment
     depends_on:
@@ -98,7 +100,7 @@ services:
     restart: on-failure
       
   §§INSTANCE-taiga-async:
-    image: taigaio/taiga-back:6.5.0
+    image: taigaio/taiga-back:6.6.2
     container_name: §§INSTANCE-taiga-async
     entrypoint: ["/taiga-back/docker/async_entrypoint.sh"]
     environment: *default-back-environment
@@ -106,29 +108,34 @@ services:
     networks:
       - bibbox-default-network
     depends_on:
-      - §§INSTANCE-taiga-db
-      - §§INSTANCE-taiga-back
-      - §§INSTANCE-taiga-async-rabbitmq
-    links:
-      - §§INSTANCE-taiga-db:taiga-db
-      - §§INSTANCE-taiga-back:taiga-back
-      - §§INSTANCE-taiga-async-rabbitmq:taiga-async-rabbitmq
+      §§INSTANCE-taiga-db:
+        condition: service_healthy
+      §§INSTANCE-taiga-events-rabbitmq:
+        condition: service_healthy
+      §§INSTANCE-taiga-async-rabbitmq:
+        condition: service_healthy
 
   §§INSTANCE-taiga-async-rabbitmq:
-    image: rabbitmq:3-management-alpine
+    image: rabbitmq:3.8-management-alpine
     container_name: §§INSTANCE-taiga-async-rabbitmq
     environment:
       RABBITMQ_ERLANG_COOKIE: secret-erlang-cookie
       RABBITMQ_DEFAULT_USER: taiga
       RABBITMQ_DEFAULT_PASS: §§RABBITMQ_PASS
       RABBITMQ_DEFAULT_VHOST: taiga
+    healthcheck:
+      test: rabbitmq-diagnostics -q ping
+      interval: 2s
+      timeout: 15s
+      retries: 5
+      start_period: 3s
     volumes:
       - ./data/taiga-async-rabbitmq-data:/var/lib/rabbitmq
     networks:
       - bibbox-default-network
 
   §§INSTANCE-taiga-front:
-    image: taigaio/taiga-front:6.5.0
+    image: taigaio/taiga-front:6.6.0
     container_name: §§INSTANCE-taiga-front
     environment:
       TAIGA_URL: "https://§§INSTANCE.§§BASEURL"
@@ -139,7 +146,7 @@ services:
     #   - ./conf.json:/usr/share/nginx/html/conf.json
 
   §§INSTANCE-taiga-events:
-    image: taigaio/taiga-events:6.5.0
+    image: taigaio/taiga-events:6.6.0
     container_name: §§INSTANCE-taiga-events
     environment:
       RABBITMQ_USER: taiga
@@ -148,25 +155,31 @@ services:
     networks:
       - bibbox-default-network
     depends_on:
-      - §§INSTANCE-taiga-events-rabbitmq
-    links:
-      - §§INSTANCE-taiga-events-rabbitmq:taiga-events-rabbitmq
+      bibbox-taiga-events-rabbitmq:
+        condition: service_healthy
 
   §§INSTANCE-taiga-events-rabbitmq:
-    image: rabbitmq:3-management-alpine
+    image: rabbitmq:3.8-management-alpine
     container_name: §§INSTANCE-taiga-events-rabbitmq
     environment:
       RABBITMQ_ERLANG_COOKIE: secret-erlang-cookie
       RABBITMQ_DEFAULT_USER: taiga
       RABBITMQ_DEFAULT_PASS: §§RABBITMQ_PASS
       RABBITMQ_DEFAULT_VHOST: taiga
+    hostname: "§§INSTANCE-taiga-events-rabbitmq"
+    healthcheck:
+      test: rabbitmq-diagnostics -q ping
+      interval: 2s
+      timeout: 15s
+      retries: 5
+      start_period: 3s
     volumes:
       - ./data/taiga-events-rabbitmq-data:/var/lib/rabbitmq
     networks:
       - bibbox-default-network
 
   taiga-protected:
-    image: taigaio/taiga-protected:6.5.0
+    image: taigaio/taiga-protected:6.6.0
     container_name: §§INSTANCE-taiga-protected
     environment:
       MAX_AGE: 360
@@ -190,10 +203,6 @@ services:
       - §§INSTANCE-taiga-front
       - §§INSTANCE-taiga-back
       - §§INSTANCE-taiga-events
-    links:
-      - §§INSTANCE-taiga-front:taiga-front
-      - §§INSTANCE-taiga-back:taiga-back
-      - §§INSTANCE-taiga-events:taiga-events
     proxy:
      TYPE: PRIMARY
      URLPREFIX: §§INSTANCE
