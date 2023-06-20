@@ -62,7 +62,7 @@ services:
       - bibbox-default-network
 
   §§INSTANCE-taiga-back:
-    image: taigaio/taiga-back:6.5.0
+    image: taigaio/taiga-back:6.6.2
     container_name: §§INSTANCE-taiga-back
     environment: *default-back-environment
     volumes: *default-back-volumes
@@ -78,7 +78,7 @@ services:
       - §§INSTANCE-taiga-async-rabbitmq:taiga-async-rabbitmq
 
   §§INSTANCE-taiga-create-admin:
-    image: taigaio/taiga-back:6.5.0
+    image: taigaio/taiga-back:6.6.2
     container_name: §§INSTANCE-taiga-create-admin
     environment: *default-back-environment
     depends_on:
@@ -98,7 +98,7 @@ services:
     restart: on-failure
       
   §§INSTANCE-taiga-async:
-    image: taigaio/taiga-back:6.5.0
+    image: taigaio/taiga-back:6.6.2
     container_name: §§INSTANCE-taiga-async
     entrypoint: ["/taiga-back/docker/async_entrypoint.sh"]
     environment: *default-back-environment
@@ -115,7 +115,7 @@ services:
       - §§INSTANCE-taiga-async-rabbitmq:taiga-async-rabbitmq
 
   §§INSTANCE-taiga-async-rabbitmq:
-    image: rabbitmq:3-management-alpine
+    image: rabbitmq:3.8-management-alpine
     container_name: §§INSTANCE-taiga-async-rabbitmq
     environment:
       RABBITMQ_ERLANG_COOKIE: secret-erlang-cookie
@@ -128,7 +128,7 @@ services:
       - bibbox-default-network
 
   §§INSTANCE-taiga-front:
-    image: taigaio/taiga-front:6.5.0
+    image: taigaio/taiga-front:6.6.0
     container_name: §§INSTANCE-taiga-front
     environment:
       TAIGA_URL: "https://§§INSTANCE.§§BASEURL"
@@ -139,7 +139,7 @@ services:
     #   - ./conf.json:/usr/share/nginx/html/conf.json
 
   §§INSTANCE-taiga-events:
-    image: taigaio/taiga-events:6.5.0
+    image: taigaio/taiga-events:6.6.0
     container_name: §§INSTANCE-taiga-events
     environment:
       RABBITMQ_USER: taiga
@@ -153,7 +153,7 @@ services:
       - §§INSTANCE-taiga-events-rabbitmq:taiga-events-rabbitmq
 
   §§INSTANCE-taiga-events-rabbitmq:
-    image: rabbitmq:3-management-alpine
+    image: rabbitmq:3.8-management-alpine
     container_name: §§INSTANCE-taiga-events-rabbitmq
     environment:
       RABBITMQ_ERLANG_COOKIE: secret-erlang-cookie
@@ -166,7 +166,7 @@ services:
       - bibbox-default-network
 
   taiga-protected:
-    image: taigaio/taiga-protected:6.5.0
+    image: taigaio/taiga-protected:6.6.0
     container_name: §§INSTANCE-taiga-protected
     environment:
       MAX_AGE: 360
