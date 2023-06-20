@@ -76,6 +76,10 @@ services:
         condition: service_healthy
       bibbox-taiga-async-rabbitmq:
         condition: service_healthy
+    links:
+      - bibbox-taiga-db:taiga-db
+      - bibbox-taiga-events-rabbitmq:taiga-events-rabbitmq
+      - bibbox-taiga-async-rabbitmq:taiga-async-rabbitmq
 
   bibbox-taiga-create-admin:
     image: taigaio/taiga-back:6.6.2
@@ -116,6 +120,10 @@ services:
         condition: service_healthy
       bibbox-taiga-async-rabbitmq:
         condition: service_healthy
+    links:
+      - bibbox-taiga-db:taiga-db
+      - bibbox-taiga-back:taiga-back
+      - bibbox-taiga-async-rabbitmq:taiga-async-rabbitmq
 
   bibbox-taiga-async-rabbitmq:
     image: rabbitmq:3.8-management-alpine
@@ -160,6 +168,8 @@ services:
     depends_on:
       bibbox-taiga-events-rabbitmq:
         condition: service_healthy
+    links:
+      - bibbox-taiga-events-rabbitmq:taiga-events-rabbitmq
 
   bibbox-taiga-events-rabbitmq:
     image: rabbitmq:3.8-management-alpine
@@ -206,7 +216,9 @@ services:
       - bibbox-taiga-front
       - bibbox-taiga-back
       - bibbox-taiga-events
-    
-
+    links:
+      - bibbox-taiga-front:taiga-front
+      - bibbox-taiga-back:taiga-back
+      - bibbox-taiga-events:taiga-events
 
 

@@ -78,6 +78,10 @@ services:
         condition: service_healthy
       §§INSTANCE-taiga-async-rabbitmq:
         condition: service_healthy
+    links:
+      - §§INSTANCE-taiga-db:taiga-db
+      - §§INSTANCE-taiga-events-rabbitmq:taiga-events-rabbitmq
+      - §§INSTANCE-taiga-async-rabbitmq:taiga-async-rabbitmq
 
   §§INSTANCE-taiga-create-admin:
     image: taigaio/taiga-back:6.6.2
@@ -114,6 +118,10 @@ services:
         condition: service_healthy
       §§INSTANCE-taiga-async-rabbitmq:
         condition: service_healthy
+    links:
+      - §§INSTANCE-taiga-db:taiga-db
+      - §§INSTANCE-taiga-back:taiga-back
+      - §§INSTANCE-taiga-async-rabbitmq:taiga-async-rabbitmq
 
   §§INSTANCE-taiga-async-rabbitmq:
     image: rabbitmq:3.8-management-alpine
@@ -157,6 +165,8 @@ services:
     depends_on:
       bibbox-taiga-events-rabbitmq:
         condition: service_healthy
+    links:
+      - §§INSTANCE-taiga-events-rabbitmq:taiga-events-rabbitmq
 
   §§INSTANCE-taiga-events-rabbitmq:
     image: rabbitmq:3.8-management-alpine
@@ -166,7 +176,7 @@ services:
       RABBITMQ_DEFAULT_USER: taiga
       RABBITMQ_DEFAULT_PASS: §§RABBITMQ_PASS
       RABBITMQ_DEFAULT_VHOST: taiga
-    hostname: "§§INSTANCE-taiga-events-rabbitmq"
+    #hostname: "§§INSTANCE-taiga-events-rabbitmq"
     healthcheck:
       test: rabbitmq-diagnostics -q ping
       interval: 2s
@@ -203,6 +213,10 @@ services:
       - §§INSTANCE-taiga-front
       - §§INSTANCE-taiga-back
       - §§INSTANCE-taiga-events
+    links:
+      - §§INSTANCE-taiga-front:taiga-front
+      - §§INSTANCE-taiga-back:taiga-back
+      - §§INSTANCE-taiga-events:taiga-events
     proxy:
      TYPE: PRIMARY
      URLPREFIX: §§INSTANCE
