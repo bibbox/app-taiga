@@ -17,7 +17,7 @@ x-environment:
   # Taiga settings
   TAIGA_SECRET_KEY: §§SECRET_KEY
   TAIGA_SITES_DOMAIN: "§§INSTANCE.§§BASEURL"
-  TAIGA_SITES_SCHEME: "https"
+  TAIGA_SITES_SCHEME: "http"
   # Email settings. Uncomment following lines and configure your SMTP server
   EMAIL_BACKEND: "django.core.mail.backends.smtp.EmailBackend"
   DEFAULT_FROM_EMAIL: §§DEFAULT_FROM_EMAIL
