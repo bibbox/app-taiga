@@ -130,7 +130,7 @@
       "display_name":"ARE USING HTTP or HTTPS?",
       "type":"radio",
       "default_value":"",
-      "description":"",
+      "description":"http",
       "min_length": "0",
       "max_length": "1"
    },
@@ -139,7 +139,7 @@
       "display_name":"",
       "type":"radio",
       "default_value":"s",
-      "description":"",
+      "description":"https",
       "min_length": "0",
       "max_length": "1"
    }
