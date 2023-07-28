@@ -124,6 +124,24 @@
       "description":"PUBLIC REGISTER (\"True\" or \"False\")",
       "min_length": "1",
       "max_length": "128"
+   },
+   {
+      "id":"SECURE",
+      "display_name":"ARE USING HTTP or HTTPS?",
+      "type":"radio",
+      "default_value":"",
+      "description":"",
+      "min_length": "0",
+      "max_length": "1"
+   },
+   {
+      "id":"SECURE",
+      "display_name":"",
+      "type":"radio",
+      "default_value":"s",
+      "description":"",
+      "min_length": "0",
+      "max_length": "1"
    }
 
 
