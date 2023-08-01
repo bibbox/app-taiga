@@ -132,7 +132,7 @@
       "default_value":":",
       "description":"http",
       "min_length": "0",
-      "max_length": "1"
+      "max_length": "2"
    },
    {
       "id":"SECURE",
@@ -141,7 +141,7 @@
       "default_value":"s:",
       "description":"https",
       "min_length": "0",
-      "max_length": "1"
+      "max_length": "2"
    }
 
 
