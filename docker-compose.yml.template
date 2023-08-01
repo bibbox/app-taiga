@@ -131,8 +131,8 @@ services:
     image: taigaio/taiga-front:6.7.0
     container_name: §§INSTANCE-taiga-front
     environment:
-      TAIGA_URL: "http§§SECURE://§§INSTANCE.§§BASEURL"
-      TAIGA_WEBSOCKETS_URL: "ws§§SECURE://§§INSTANCE.§§BASEURL"
+      TAIGA_URL: "http§§SECURE//§§INSTANCE.§§BASEURL"
+      TAIGA_WEBSOCKETS_URL: "ws§§SECURE//§§INSTANCE.§§BASEURL"
     networks:
       - bibbox-default-network
     # volumes:
