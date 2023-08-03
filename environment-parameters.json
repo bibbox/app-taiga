@@ -64,7 +64,7 @@
    },  
    {
       "id":"EMAIL_USE_TLS",
-      "display_name":"Email TLS",
+      "display_name":"Use Email TLS",
       "type":"radio",
       "default_value":"\"True\"",
       "description":"True (default)",
@@ -73,7 +73,7 @@
    },
    {
       "id":"EMAIL_USE_TLS",
-      "display_name":"Email TLS",
+      "display_name":"",
       "type":"radio",
       "default_value":"\"False\"",
       "description":"False",
@@ -91,7 +91,7 @@
    }, 
    {
       "id":"EMAIL_USE_SSL",
-      "display_name":"Use Email SSL",
+      "display_name":"",
       "type":"radio",
       "default_value":"\"True\"",
       "description":"True",
@@ -136,7 +136,7 @@
    },
    {
       "id":"PUBLIC_REGISTER_ENABLED",
-      "display_name":"",
+      "display_name":"PUBLIC REGISTER",
       "type":"radio",
       "default_value":"\"False\"",
       "description":"False (default)",
@@ -145,7 +145,7 @@
    },
    {
       "id":"PUBLIC_REGISTER_ENABLED",
-      "display_name":"PUBLIC REGISTER",
+      "display_name":"",
       "type":"radio",
       "default_value":"\"True\"",
       "description":"True",
