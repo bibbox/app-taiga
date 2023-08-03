@@ -155,7 +155,7 @@
 
    {
       "id":"SECURE",
-      "display_name":"ARE USING HTTP or HTTPS?",
+      "display_name":"Are you using HTTP or HTTPS?",
       "type":"radio",
       "default_value":":",
       "description":"http (default)",
