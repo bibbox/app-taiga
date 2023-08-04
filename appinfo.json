@@ -7,5 +7,6 @@
 		"catalogue_url": "URL to biobankapps, if applicaple",
 		"application_url": "https://taiga.io/",
 		"tags": ["Project Management", "Tool"],
-		"application_documentation_url": "https://taiga.io/#Features"
+		"application_documentation_url": "https://docs.taiga.io/"
+
 }

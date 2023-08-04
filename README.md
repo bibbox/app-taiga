@@ -1,6 +1,6 @@
 # TAIGA BIBBOX application
 
-This container can be installed as [BIBBOX APP](http://bibbox.readthedocs.io/en/latest/admin-documentation/ "BIBBOX App Store") or standalone. 
+This container can be installed as [BIBBOX APP](http://bibbox.readthedocs.io/en/latest/ "BIBBOX App Store") or standalone. 
 
 * initial user/password: **admin / vendetta** 
 * after the docker installation follow these [instructions](INSTALL-APP.md)
@@ -9,11 +9,11 @@ This container can be installed as [BIBBOX APP](http://bibbox.readthedocs.io/en/
 
 Clone the github repsoitory and start the install.sh. If necessary change the ports and volume mounts in `docker-compose.yml`.  
 
-`sudo git clone https://github.com/bibbox/app-taiga`
-
-`sudo chmod +x install.sh`
-
-`sudo ./install.sh`
+```
+sudo git clone https://github.com/bibbox/app-taiga
+sudo chmod +x install.sh
+sudo ./install.sh
+```
 
 The default port is 9000, you can start Taiga with
 
@@ -39,7 +39,6 @@ Within BIBBOX you can use the [BIBBOX](https://bibbox.readthedocs.io/en/latest/ 
 
 * [Offical TIAGA Documentation](http://taigaio.github.io/taiga-doc/dist/)
 * [TAIGA FAQ](http://taigaio.github.io/taiga-doc/dist/setup-faqs.html)
-* [Upgrade Information (without docker)](http://taigaio.github.io/taiga-doc/dist/upgrades.html)
 
 ## Install Environment Variables
 
