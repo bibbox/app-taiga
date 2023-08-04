@@ -10,10 +10,10 @@ networks:
 x-environment:
   &default-back-environment
   # Database settings
-  POSTGRES_DB: taiga
-  POSTGRES_USER: taiga
-  POSTGRES_PASSWORD: taiga
-  POSTGRES_HOST: taiga-db
+  POSTGRES_DB: "taiga"
+  POSTGRES_USER: "taiga"
+  POSTGRES_PASSWORD: "taiga"
+  POSTGRES_HOST: "taiga-db"
   # Taiga settings
   TAIGA_SECRET_KEY: "taiga-back-secret-key"
   TAIGA_SITES_DOMAIN: "localhost:9000"
@@ -29,8 +29,8 @@ x-environment:
   # EMAIL_HOST_PASSWORD: "password"
   # Rabbitmq settings
   # Should be the same as in taiga-async-rabbitmq and taiga-events-rabbitmq
-  RABBITMQ_USER: taiga
-  RABBITMQ_PASS: taiga
+  RABBITMQ_USER: "taiga"
+  RABBITMQ_PASS: "taiga"
   # Telemetry settings
   ENABLE_TELEMETRY: "True"
   #SuperUser
@@ -51,16 +51,16 @@ services:
     image: postgres:12.3
     container_name: bibbox-taiga-db
     environment:
-      POSTGRES_DB: taiga
-      POSTGRES_USER: taiga
-      POSTGRES_PASSWORD: taiga
+      POSTGRES_DB: "taiga"
+      POSTGRES_USER: "taiga"
+      POSTGRES_PASSWORD: "taiga"
     volumes:
       - ./data/taiga-db-data:/var/lib/postgresql/data
     networks:
       - bibbox-default-network
 
   bibbox-taiga-back:
-    image: taigaio/taiga-back:6.5.0
+    image: taigaio/taiga-back:6.7.0
     container_name: bibbox-taiga-back
     environment: *default-back-environment
     volumes: *default-back-volumes
@@ -76,7 +76,7 @@ services:
       - bibbox-taiga-async-rabbitmq:taiga-async-rabbitmq
 
   bibbox-taiga-create-admin:
-    image: taigaio/taiga-back:6.5.0
+    image: taigaio/taiga-back:6.7.0
     container_name: bibbox-taiga-create-admin
     environment: *default-back-environment
       
@@ -100,7 +100,7 @@ services:
     restart: on-failure
     
   bibbox-taiga-async:
-    image: taigaio/taiga-back:6.5.0
+    image: taigaio/taiga-back:6.7.0
     container_name: bibbox-taiga-async
     entrypoint: ["/taiga-back/docker/async_entrypoint.sh"]
     environment: *default-back-environment
@@ -117,7 +117,7 @@ services:
       - bibbox-taiga-async-rabbitmq:taiga-async-rabbitmq
 
   bibbox-taiga-async-rabbitmq:
-    image: rabbitmq:3-management-alpine
+    image: rabbitmq:3.8-management-alpine
     container_name: bibbox-taiga-async-rabbitmq
     environment:
       RABBITMQ_ERLANG_COOKIE: secret-erlang-cookie
@@ -130,7 +130,7 @@ services:
       - bibbox-default-network
 
   bibbox-taiga-front:
-    image: taigaio/taiga-front:6.5.0
+    image: taigaio/taiga-front:6.7.0
     container_name: bibbox-taiga-front
     environment:
       TAIGA_URL: "http://localhost:9000"
@@ -141,7 +141,7 @@ services:
     #   - ./conf.json:/usr/share/nginx/html/conf.json
 
   bibbox-taiga-events:
-    image: taigaio/taiga-events:6.5.0
+    image: taigaio/taiga-events:6.7.0
     container_name: bibbox-taiga-events
     environment:
       RABBITMQ_USER: taiga
@@ -155,7 +155,7 @@ services:
       - bibbox-taiga-events-rabbitmq:taiga-events-rabbitmq
 
   bibbox-taiga-events-rabbitmq:
-    image: rabbitmq:3-management-alpine
+    image: rabbitmq:3.8-management-alpine
     container_name: bibbox-taiga-events-rabbitmq
     environment:
       RABBITMQ_ERLANG_COOKIE: secret-erlang-cookie
@@ -168,7 +168,7 @@ services:
       - bibbox-default-network
 
   taiga-protected:
-    image: taigaio/taiga-protected:6.5.0
+    image: taigaio/taiga-protected:6.7.0
     container_name: bibbox-taiga-protected
     environment:
       MAX_AGE: 360

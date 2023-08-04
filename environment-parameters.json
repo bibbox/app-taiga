@@ -64,22 +64,40 @@
    },  
    {
       "id":"EMAIL_USE_TLS",
-      "display_name":"Email TLS",
-      "type":"text",
+      "display_name":"Use Email TLS",
+      "type":"radio",
       "default_value":"\"True\"",
-      "description":"TLS (\"True\" or \"False\")",
-      "min_length": "1",
-      "max_length": "128"
-   },  
+      "description":"True (default)",
+      "min_length": "4",
+      "max_length": "5"
+   },
+   {
+      "id":"EMAIL_USE_TLS",
+      "display_name":"",
+      "type":"radio",
+      "default_value":"\"False\"",
+      "description":"False",
+      "min_length": "4",
+      "max_length": "5"
+   },
    {
       "id":"EMAIL_USE_SSL",
-      "display_name":"Email SSL",
-      "type":"text",
+      "display_name":"Use Email SSL",
+      "type":"radio",
       "default_value":"\"False\"",
-      "description":"SSL (\"True\" or \"False\")",
-      "min_length": "1",
-      "max_length": "128"
-   },  
+      "description":"False (default)",
+      "min_length": "4",
+      "max_length": "5"
+   }, 
+   {
+      "id":"EMAIL_USE_SSL",
+      "display_name":"",
+      "type":"radio",
+      "default_value":"\"True\"",
+      "description":"True",
+      "min_length": "4",
+      "max_length": "5"
+   },
    {
       "id":"EMAIL_HOST",
       "display_name":"EMAIL HOST SERVER",
@@ -115,15 +133,43 @@
       "description":"Password",
       "min_length": "1",
       "max_length": "128"
-   },  
+   },
    {
       "id":"PUBLIC_REGISTER_ENABLED",
       "display_name":"PUBLIC REGISTER",
-      "type":"text",
+      "type":"radio",
       "default_value":"\"False\"",
-      "description":"PUBLIC REGISTER (\"True\" or \"False\")",
-      "min_length": "1",
-      "max_length": "128"
+      "description":"False (default)",
+      "min_length": "4",
+      "max_length": "5"
+   },
+   {
+      "id":"PUBLIC_REGISTER_ENABLED",
+      "display_name":"",
+      "type":"radio",
+      "default_value":"\"True\"",
+      "description":"True",
+      "min_length": "4",
+      "max_length": "5"
+   },
+
+   {
+      "id":"SECURE",
+      "display_name":"Are you using HTTP or HTTPS?",
+      "type":"radio",
+      "default_value":":",
+      "description":"http (default)",
+      "min_length": "0",
+      "max_length": "2"
+   },
+   {
+      "id":"SECURE",
+      "display_name":"",
+      "type":"radio",
+      "default_value":"s:",
+      "description":"https",
+      "min_length": "0",
+      "max_length": "2"
    }
 
 
