@@ -37,8 +37,8 @@ Within BIBBOX you can use the [BIBBOX](https://bibbox.readthedocs.io/en/latest/ 
 
 ### Documentation
 
-* [Offical TIAGA Documentation](http://taigaio.github.io/taiga-doc/dist/)
-* [TAIGA FAQ](http://taigaio.github.io/taiga-doc/dist/setup-faqs.html)
+* [Offical TIAGA Documentation](https://docs.taiga.io/)
+* [TAIGA FAQ](https://community.taiga.io/c/faq/)
 
 ## Install Environment Variables
 
