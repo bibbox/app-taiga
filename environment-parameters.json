@@ -30,7 +30,7 @@
       "id":"ADMIN_PASSWORD",
       "display_name":"Admin Password",
       "type":"password",
-      "default_value":"vendetta",
+      "default_value":"changethispasswordinproductionenvironments",
       "description":"Admin Password",
       "min_length": "1",
       "max_length": "128"
@@ -129,7 +129,7 @@
       "id":"EMAIL_PASSWORD",
       "display_name":"Email Password",
       "type":"password",
-      "default_value":"password",
+      "default_value":"changethispasswordinproductionenvironments",
       "description":"Password",
       "min_length": "1",
       "max_length": "128"
