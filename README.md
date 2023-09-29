@@ -83,25 +83,25 @@ The default values for the standalone installation are:
 
   
 ## Mounted Volumes
-### postgres Conatiner
+### postgres Container
   - *./data/taiga-db-data:/var/lib/postgresql/data*
-### taigaio/taiga-back Conatiner
+### taigaio/taiga-back Container
   - *./data/taiga-static-data:/taiga-back/static*
   - *./data/taiga-media-data:/taiga-back/media*
   - *./data/create_admin.py:/taiga-back/create_admin.py*
-### taigaio/taiga-back Conatiner
+### taigaio/taiga-back Container
   - *./data/taiga-static-data:/taiga-back/static*
   - *./data/taiga-media-data:/taiga-back/media*
   - *./data/create_admin.py:/taiga-back/create_admin.py*
-### taigaio/taiga-back Conatiner
+### taigaio/taiga-back Container
   - *./data/taiga-static-data:/taiga-back/static*
   - *./data/taiga-media-data:/taiga-back/media*
   - *./data/create_admin.py:/taiga-back/create_admin.py*
-### rabbitmq Conatiner
+### rabbitmq Container
   - *./data/taiga-async-rabbitmq-data:/var/lib/rabbitmq*
-### rabbitmq Conatiner
+### rabbitmq Container
   - *./data/taiga-events-rabbitmq-data:/var/lib/rabbitmq*
-### nginx Conatiner
+### nginx Container
   - *./data/taiga-gateway/nginx.conf:/etc/nginx/conf.d/default.conf*
   - *./data/taiga-gateway/proxy_params:/etc/nginx/proxy_params*
   - *./data/taiga-static-data:/taiga/static*
