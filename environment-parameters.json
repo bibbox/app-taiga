@@ -69,7 +69,7 @@
       "default_value":"\"True\"",
       "description":"True (default)",
       "min_length": "4",
-      "max_length": "5"
+      "max_length": "7"
    },
    {
       "id":"EMAIL_USE_TLS",
@@ -78,7 +78,7 @@
       "default_value":"\"False\"",
       "description":"False",
       "min_length": "4",
-      "max_length": "5"
+      "max_length": "7"
    },
    {
       "id":"EMAIL_USE_SSL",
@@ -87,7 +87,7 @@
       "default_value":"\"False\"",
       "description":"False (default)",
       "min_length": "4",
-      "max_length": "5"
+      "max_length": "7"
    }, 
    {
       "id":"EMAIL_USE_SSL",
@@ -96,7 +96,7 @@
       "default_value":"\"True\"",
       "description":"True",
       "min_length": "4",
-      "max_length": "5"
+      "max_length": "7"
    },
    {
       "id":"EMAIL_HOST",
@@ -141,7 +141,7 @@
       "default_value":"\"False\"",
       "description":"False (default)",
       "min_length": "4",
-      "max_length": "5"
+      "max_length": "7"
    },
    {
       "id":"PUBLIC_REGISTER_ENABLED",
@@ -150,7 +150,7 @@
       "default_value":"\"True\"",
       "description":"True",
       "min_length": "4",
-      "max_length": "5"
+      "max_length": "7"
    },
 
    {
